@@ -49,7 +49,7 @@ def get_actor_window(window_type):
         def onInit(self):
             super(DialogActorInfo, self).onInit()
             pass_dict_to_skin(data=self.info,
-                              prefix="actor.",
+                              prefix="",
                               window_id=self.window_id)
             self.fill_lists()
 

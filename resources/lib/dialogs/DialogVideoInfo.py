@@ -75,11 +75,11 @@ def get_movie_window(window_type):
         def onInit(self):
             super(DialogVideoInfo, self).onInit()
             pass_dict_to_skin(data=self.info,
-                              prefix="movie.",
+                              prefix="",
                               window_id=self.window_id)
             self.fill_lists()
             pass_dict_to_skin(data=self.setinfo,
-                              prefix="movie.set.",
+                              prefix="set.",
                               window_id=self.window_id)
             super(DialogVideoInfo, self).update_states()
             self.join_omdb = JoinOmdbThread(self.omdb_thread, self.window_id)
@@ -321,7 +321,7 @@ def get_movie_window(window_type):
             if not xbmcgui.getCurrentWindowDialogId() == self.window_id:
                 return None
             pass_dict_to_skin(data=self.omdb_thread.listitems,
-                              prefix="movie.omdb.",
+                              prefix="omdb.",
                               window_id=self.window_id)
 
     class SetItemsThread(threading.Thread):

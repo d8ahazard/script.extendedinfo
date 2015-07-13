@@ -59,7 +59,7 @@ def get_tvshow_window(window_type):
         def onInit(self):
             super(DialogTVShowInfo, self).onInit()
             pass_dict_to_skin(data=self.info,
-                              prefix="movie.",
+                              prefix="",
                               window_id=self.window_id)
             self.fill_lists()
             super(DialogTVShowInfo, self).update_states()

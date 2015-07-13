@@ -54,7 +54,7 @@ def get_episode_window(window_type):
 
         def onInit(self):
             super(DialogEpisodeInfo, self).onInit()
-            pass_dict_to_skin(self.info, "movie.", False, False, self.window_id)
+            pass_dict_to_skin(self.info, "", False, False, self.window_id)
             self.fill_lists()
             super(DialogEpisodeInfo, self).update_states()
 

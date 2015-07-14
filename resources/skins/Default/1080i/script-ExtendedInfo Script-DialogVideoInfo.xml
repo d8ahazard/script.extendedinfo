@@ -1751,7 +1751,7 @@
                                         <posx>50</posx>
                                         <width>273</width>
                                         <height>100</height>
-                                        <texture fallback="flags/studios/default-studio.png">$INFO[ListItem.Label,flags/studios/,.png]</texture>
+                                        <texture fallback="resource://resource.images.studioicons.white/default-studio.png">$INFO[ListItem.Label,resource://resource.images.studioicons.white/,.png]</texture>
                                         <aspectratio aligny="center" align="center">keep</aspectratio>
                                     </control>
                                     <control type="textbox">
@@ -1788,7 +1788,7 @@
                                         <posx>50</posx>
                                         <width>273</width>
                                         <height>100</height>
-                                        <texture fallback="flags/studios/default-studio.png">$INFO[ListItem.Label,flags/studios/,.png]</texture>
+                                        <texture fallback="resource://resource.images.studioicons.white/default-studio.png">$INFO[ListItem.Label,resource://resource.images.studioicons.white/,.png]</texture>
                                         <aspectratio aligny="center" align="center">keep</aspectratio>
                                     </control>
                                     <control type="textbox">

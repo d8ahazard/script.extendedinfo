@@ -45,13 +45,12 @@ def get_movie_window(window_type):
                 self.info['poster'] = get_file(self.info.get("poster", ""))
             sets_thread.join()
             self.setinfo = sets_thread.setinfo
-            self.data["similar"] = [i for i in self.data["similar"] if i["id"] not in sets_thread.id_list]
             filter_thread.join()
             self.info['ImageFilter'] = filter_thread.image
             self.info['ImageColor'] = filter_thread.imagecolor
             lists_thread.join()
             self.listitems = [(1000, self.data["actors"]),
-                              (150, self.data["similar"]),
+                              (150, [i for i in self.data["similar"] if i["id"] not in sets_thread.id_list]),
                               (250, sets_thread.listitems),
                               (450, lists_thread.listitems),
                               (550, self.data["studios"]),

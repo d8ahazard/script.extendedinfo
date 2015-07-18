@@ -54,6 +54,8 @@ ACTIONS = {"left": xbmcgui.ACTION_MOVE_LEFT,
            "nextcalibration": xbmcgui.ACTION_CALIBRATE_SWAP_ARROWS,
            "resetcalibration": xbmcgui.ACTION_CALIBRATE_RESET,
            "analogmove": xbmcgui.ACTION_ANALOG_MOVE,
+           "analogmovex": xbmcgui.ACTION_ANALOG_MOVE_X,
+           "analogmovey": xbmcgui.ACTION_ANALOG_MOVE_Y,
            "rotate": xbmcgui.ACTION_ROTATE_PICTURE_CW,
            "rotateccw": xbmcgui.ACTION_ROTATE_PICTURE_CCW,
            "close": xbmcgui.ACTION_NAV_BACK,  # backwards compatibility
@@ -167,6 +169,7 @@ ACTIONS = {"left": xbmcgui.ACTION_MOVE_LEFT,
            "decreasepar": xbmcgui.ACTION_DECREASE_PAR,
            "volampup": xbmcgui.ACTION_VOLAMP_UP,
            "volampdown": xbmcgui.ACTION_VOLAMP_DOWN,
+           "volumeamplification": xbmcgui.ACTION_VOLAMP,
            "createbookmark": xbmcgui.ACTION_CREATE_BOOKMARK,
            "createepisodebookmark": xbmcgui.ACTION_CREATE_EPISODE_BOOKMARK,
            "settingsreset": xbmcgui.ACTION_SETTINGS_RESET,
@@ -204,6 +207,7 @@ ACTIONS = {"left": xbmcgui.ACTION_MOVE_LEFT,
            "swipedown": xbmcgui.ACTION_GESTURE_SWIPE_DOWN,
 
            # Do nothing / error action
+           "error": xbmcgui.ACTION_ERROR,
            "noop": xbmcgui.ACTION_NOOP
            }
 

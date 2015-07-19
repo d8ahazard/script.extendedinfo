@@ -268,10 +268,7 @@ def create_channel_list():
 
 class LocalDbMovieProvider(object):
     def __init__(self, *args, **kwargs):
-        self.id_list = []
-        self.otitle_list = []
-        self.title_list = []
-        self.imdb_list = []
+        self.album_list = []
         self.info = {"tvshows": {}, "movies": {}}
 
     def merge_with_local_info(self, online_list=[], library_first=True, sortkey=False, media_type="tvshows"):
@@ -351,25 +348,25 @@ class LocalDbMovieProvider(object):
                                   reverse=True)
         return local_items + remote_items
 
+    def compare_album_with_library(online_list):
+        if not self.album_list:
+            self.album_list = get_kodi_albums()
+        for online_item in online_list:
+            for local_item in self.album_list:
+                if not online_item["name"] == local_item["title"]:
+                    continue
+                json_response = get_kodi_json(method="AudioLibrary.getAlbumDetails",
+                                              params='{"properties": ["thumbnail"], "albumid":%s }' % str(local_item["albumid"]))
+                album = json_response["result"]["albumdetails"]
+                online_item["dbid"] = album["albumid"]
+                online_item["path"] = 'plugin://script.extendedinfo/?info=playalbum&&dbid=%i' % album['albumid']
+                if album["thumbnail"]:
+                    online_item.update({"thumb": album["thumbnail"]})
+                    online_item.update({"Icon": album["thumbnail"]})
+                break
+        return online_list
+
 localdb = LocalDbMovieProvider()
-
-
-def compare_album_with_library(online_list):
-    local_list = get_kodi_albums()
-    for online_item in online_list:
-        for local_item in local_list:
-            if not online_item["name"] == local_item["title"]:
-                continue
-            json_response = get_kodi_json(method="AudioLibrary.getAlbumDetails",
-                                          params='{"properties": ["thumbnail"], "albumid":%s }' % str(local_item["albumid"]))
-            album = json_response["result"]["albumdetails"]
-            online_item["dbid"] = album["albumid"]
-            online_item["path"] = 'plugin://script.extendedinfo/?info=playalbum&&dbid=%i' % album['albumid']
-            if album["thumbnail"]:
-                online_item.update({"thumb": album["thumbnail"]})
-                online_item.update({"Icon": album["thumbnail"]})
-            break
-    return online_list
 
 
 def get_set_name_from_db(dbid):

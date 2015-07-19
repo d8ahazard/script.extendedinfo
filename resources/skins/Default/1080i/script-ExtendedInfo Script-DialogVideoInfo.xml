@@ -1837,7 +1837,7 @@
                         <height>390</height>
                         <posx>0</posx>
                         <posy>0</posy>
-                        <animation effect="zoom" start="0" end="104" time="0" center="260,0" condition="true">Conditional</animation>
+                        <animation effect="zoom" start="0" end="104" time="0" center="260,150" condition="true">Conditional</animation>
                         <aspectratio aligny="top">keep</aspectratio>
                         <texture>$INFO[Window.Property(banner)]</texture>
                         <visible>!isEmpty(Window.Property(banner))</visible>

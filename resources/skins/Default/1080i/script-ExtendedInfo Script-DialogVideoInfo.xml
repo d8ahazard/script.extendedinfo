@@ -141,7 +141,7 @@
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>22</textoffsety>
+                                <textoffsety>25</textoffsety>
                                 <radioposx>30</radioposx>
                                 <radioposy>27</radioposy>
                                 <radiowidth>36</radiowidth>
@@ -165,7 +165,7 @@
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>22</textoffsety>
+                                <textoffsety>25</textoffsety>
                                 <radioposx>30</radioposx>
                                 <radioposy>27</radioposy>
                                 <radiowidth>36</radiowidth>
@@ -188,7 +188,7 @@
                                     <textcolor>FF999999</textcolor>
                                     <focusedcolor>FFFAFAFA</focusedcolor>
                                     <aligny>bottom</aligny>
-                                    <textoffsety>22</textoffsety>
+                                    <textoffsety>25</textoffsety>
                                     <onclick>Action(Close)</onclick>
                                     <onleft>120</onleft>
                                     <onright>6001</onright>
@@ -233,7 +233,7 @@
                                     <ondown>1000</ondown>
                                     <aligny>bottom</aligny>
                                     <selected>!IsEmpty(Window.Property(rated))</selected>
-                                    <textoffsety>22</textoffsety>
+                                    <textoffsety>25</textoffsety>
                                     <radioposx>30</radioposx>
                                     <radioposy>27</radioposy>
                                     <radiowidth>36</radiowidth>
@@ -272,7 +272,7 @@
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>22</textoffsety>
+                                <textoffsety>25</textoffsety>
                                 <radioposx>30</radioposx>
                                 <radioposy>27</radioposy>
                                 <radiowidth>36</radiowidth>
@@ -298,7 +298,7 @@
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>22</textoffsety>
+                                <textoffsety>25</textoffsety>
                                 <radioposx>30</radioposx>
                                 <radioposy>27</radioposy>
                                 <radiowidth>36</radiowidth>
@@ -323,7 +323,7 @@
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>22</textoffsety>
+                                <textoffsety>25</textoffsety>
                                 <radioposx>30</radioposx>
                                 <radioposy>27</radioposy>
                                 <radiowidth>36</radiowidth>
@@ -348,7 +348,7 @@
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>22</textoffsety>
+                                <textoffsety>25</textoffsety>
                                 <radioposx>30</radioposx>
                                 <radioposy>27</radioposy>
                                 <radiowidth>36</radiowidth>
@@ -368,7 +368,7 @@
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>22</textoffsety>
+                                <textoffsety>25</textoffsety>
                                 <radioposx>30</radioposx>
                                 <radioposy>27</radioposy>
                                 <radiowidth>36</radiowidth>
@@ -394,7 +394,7 @@
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>22</textoffsety>
+                                <textoffsety>25</textoffsety>
                                 <radioposx>30</radioposx>
                                 <radioposy>27</radioposy>
                                 <radiowidth>36</radiowidth>

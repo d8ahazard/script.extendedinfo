@@ -43,4 +43,6 @@ def get_rottentomatoes_movies(movietype):
                  'Plot': item["synopsis"]}
         if imdb_id:
             movies.append(movie)
-    return localdb.merge_with_local_movie_info(movies, False)
+    return localdb.merge_with_local_info(online_list=movies,
+                                         library_first=False,
+                                         media_type="movies")

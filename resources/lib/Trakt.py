@@ -95,8 +95,9 @@ def handle_trakt_movies(results):
                  'fanart': movie["movie"]["images"]["fanart"]["full"],
                  'thumb': movie['movie']["images"]["poster"]["thumb"]}
         movies.append(movie)
-    movies = localdb.merge_with_local_movie_info(online_list=movies,
-                                                 library_first=False)
+    movies = localdb.merge_with_local_info(online_list=movies,
+                                           library_first=False,
+                                           media_type="movies")
     return movies
 
 
@@ -134,8 +135,9 @@ def handle_trakt_tvshows(results):
                 'fanart': tvshow['show']["images"]["fanart"]["full"],
                 'thumb': tvshow['show']["images"]["poster"]["thumb"]}
         shows.append(show)
-    shows = localdb.merge_with_local_tvshow_info(online_list=shows,
-                                                 library_first=False)
+    shows = localdb.merge_with_local_info(online_list=shows,
+                                          library_first=False,
+                                          media_type="tvshows")
     return shows
 
 

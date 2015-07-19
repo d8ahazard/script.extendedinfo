@@ -277,12 +277,15 @@ class LocalDbMovieProvider(object):
             self.info[media_type]["otitles"] = []
             self.info[media_type]["titles"] = []
             now = time.time()
-            self.info[media_type]["ids"] = xbmc.getInfoLabel("Window(home).Property(id_list.%s)" % media_type)
+            self.info[media_type]["ids"] = xbmc.getInfoLabel("Window(home).Property(ids.%s)" % media_type)
             if self.info[media_type]["ids"] and self.info[media_type]["ids"] != "[]":
                 self.info[media_type]["ids"] = simplejson.loads(self.info[media_type]["ids"])
-                self.info[media_type]["otitles"] = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(otitles.%s)" % media_type))
-                self.info[media_type]["titles"] = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(titles.%s)" % media_type))
-                self.info[media_type]["imdbs"] = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(imdbs.%s)" % media_type))
+                for prop in ["otitles", "titles", "imdbs"]:
+                    try:
+                        self.info[media_type][prop] = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(%s.%s)" % (prop, media_type)))
+                    except:
+                        log("exception: %s" % xbmc.getInfoLabel("Window(home).Property(%s.%s)" % (prop, media_type)))
+                        self.info[media_type][prop] = []
             else:
                 self.info[media_type]["ids"] = []
                 if media_type == "tvshows":

@@ -92,10 +92,11 @@
                         </control>
                     </control>
                     <control type="group" id="50000">
-                        <height>120</height>
+                        <height>85</height>
                         <control type="image">
-                            <posx>-50</posx>
-                            <posy>65</posy>
+                            <posx>0</posx>
+                            <animation effect="slide" start="0,0" end="-22,0" time="0" condition="true">Conditional</animation>
+                            <posy>35</posy>
                             <width>28</width>
                             <height>28</height>
                             <texture colordiffuse="$INFO[Window(home).Property(ImageColor)]" flipx="true">arrowright.png</texture>
@@ -105,7 +106,7 @@
                         </control>
                         <control type="image">
                             <posx>1100</posx>
-                            <posy>65</posy>
+                            <posy>35</posy>
                             <width>28</width>
                             <height>28</height>
                             <texture colordiffuse="$INFO[Window(home).Property(ImageColor)]">arrowright.png</texture>
@@ -117,7 +118,7 @@
                             <posx>0</posx>
                             <posy>0</posy>
                             <width>1090</width>
-                            <height>400</height>
+                            <height>250</height>
                             <onup>132</onup>
                             <ondown>1000</ondown>
                             <itemgap>-10</itemgap>
@@ -130,20 +131,21 @@
                                 <textureradiooffnofocus colordiffuse="FF999999">icons/play.png</textureradiooffnofocus>
                                 <textureradioonnofocus colordiffuse="FF999999">icons/play.png</textureradioonnofocus>
                                 <width>280</width>
-                                <height>140</height>
-                                <textoffsetx>0</textoffsetx>
-                                <align>center</align>
+                                <height>95</height>
+                                <textoffsetx>80</textoffsetx>
+                                <textwidth>250</textwidth>
+                                <align>left</align>
                                 <texturefocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-focus.png</texturefocus>
                                 <texturenofocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-nofocus.png</texturenofocus>
                                 <font>font13</font>
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>77</textoffsety>
-                                <radioposx>118</radioposx>
-                                <radioposy>30</radioposy>
-                                <radiowidth>44</radiowidth>
-                                <radioheight>44</radioheight>
+                                <textoffsety>22</textoffsety>
+                                <radioposx>30</radioposx>
+                                <radioposy>27</radioposy>
+                                <radiowidth>36</radiowidth>
+                                <radioheight>36</radioheight>
                                 <visible>!IsEmpty(Window.Property(DBID)) + !Stringcompare(Window.Property(Type),tvshow) + !Stringcompare(Window.Property(Type),season)</visible>
                             </control>
                             <control type="radiobutton" id="120">
@@ -153,20 +155,21 @@
                                 <textureradiooffnofocus colordiffuse="FF999999">icons/play.png</textureradiooffnofocus>
                                 <textureradioonnofocus colordiffuse="FF999999">icons/play.png</textureradioonnofocus>
                                 <width>280</width>
-                                <height>140</height>
-                                <textoffsetx>0</textoffsetx>
-                                <align>center</align>
+                                <height>95</height>
+                                <textoffsetx>80</textoffsetx>
+                                <textwidth>250</textwidth>
+                                <align>left</align>
                                 <texturefocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-focus.png</texturefocus>
                                 <texturenofocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-nofocus.png</texturenofocus>
                                 <font>font13</font>
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>77</textoffsety>
-                                <radioposx>118</radioposx>
-                                <radioposy>30</radioposy>
-                                <radiowidth>44</radiowidth>
-                                <radioheight>44</radioheight>
+                                <textoffsety>22</textoffsety>
+                                <radioposx>30</radioposx>
+                                <radioposy>27</radioposy>
+                                <radiowidth>36</radiowidth>
+                                <radioheight>36</radioheight>
                                 <visible>!IsEmpty(Window.Property(DBID)) + [Stringcompare(Window.Property(Type),tvshow) | Stringcompare(Window.Property(Type),season)]</visible>
                             </control>
                             <control type="group" id="99">
@@ -175,16 +178,17 @@
                                 <control type="button" id="9">
                                     <label>$LOCALIZE[13404] $INFO[Window.Property(PercentPlayed),(,%)]</label>
                                     <width>280</width>
-                                    <height>140</height>
-                                    <textoffsetx>0</textoffsetx>
-                                    <align>center</align>
+                                    <height>95</height>
+                                    <textoffsetx>80</textoffsetx>
+                                    <textwidth>250</textwidth>
+                                    <align>left</align>
                                     <texturefocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-focus.png</texturefocus>
                                     <texturenofocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-nofocus.png</texturenofocus>
                                     <font>font13</font>
                                     <textcolor>FF999999</textcolor>
                                     <focusedcolor>FFFAFAFA</focusedcolor>
                                     <aligny>bottom</aligny>
-                                    <textoffsety>77</textoffsety>
+                                    <textoffsety>22</textoffsety>
                                     <onclick>Action(Close)</onclick>
                                     <onleft>120</onleft>
                                     <onright>6001</onright>
@@ -192,11 +196,11 @@
                                     <ondown>1000</ondown>
                                 </control>
                                 <control type="image">
-                                    <posx>100</posx>
-                                    <posy>10</posy>
+                                    <posx>15</posx>
+                                    <posy>15</posy>
                                     <texture>dialogs/circle/$INFO[Window.Property(PercentPlayed)].png</texture>
-                                    <width>80</width>
-                                    <height>80</height>
+                                    <width>60</width>
+                                    <height>60</height>
                                 </control>
                             </control>
                             <control type="group" id="30000">
@@ -214,9 +218,10 @@
                                     <posx>0</posx>
                                     <posy>0</posy>
                                     <width>280</width>
-                                    <height>140</height>
-                                    <textoffsetx>0</textoffsetx>
-                                    <align>center</align>
+                                    <height>95</height>
+                                    <textoffsetx>80</textoffsetx>
+                                    <textwidth>250</textwidth>
+                                    <align>left</align>
                                     <texturefocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-focus.png</texturefocus>
                                     <texturenofocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-nofocus.png</texturenofocus>
                                     <font>font13</font>
@@ -228,24 +233,25 @@
                                     <ondown>1000</ondown>
                                     <aligny>bottom</aligny>
                                     <selected>!IsEmpty(Window.Property(rated))</selected>
-                                    <textoffsety>77</textoffsety>
-                                    <radioposx>118</radioposx>
-                                    <radioposy>30</radioposy>
-                                    <radiowidth>44</radiowidth>
-                                    <radioheight>44</radioheight>
+                                    <textoffsety>22</textoffsety>
+                                    <radioposx>30</radioposx>
+                                    <radioposy>27</radioposy>
+                                    <radiowidth>36</radiowidth>
+                                    <radioheight>36</radioheight>
                                 </control>
                                 <control type="label">
                                     <posx>0</posx>
-                                    <posy>40</posy>
-                                    <align>center</align>
+                                    <posy>30</posy>
+                                    <align>left</align>
                                     <aligny>center</aligny>
                                     <height>30</height>
                                     <width>280</width>
-                                    <textoffsetx>0</textoffsetx>
+                                    <textoffsetx>30</textoffsetx>
+                                    <textwidth>250</textwidth>
                                     <textoffsety>0</textoffsety>
-                                    <font>font30_title</font>
+                                    <font>font13</font>
                                     <textcolor>FF999999</textcolor>
-                                    <label>$INFO[Window.Property(rated)]</label>
+                                    <label>[B]$INFO[Window.Property(rated)][/B]</label>
                                 </control>
                             </control>
                             <control type="radiobutton" id="6003">
@@ -256,20 +262,21 @@
                                 <textureradiooffnofocus colordiffuse="FF999999">icons/star.png</textureradiooffnofocus>
                                 <textureradioonnofocus colordiffuse="FF999999">icons/starminus.png</textureradioonnofocus>
                                 <width>280</width>
-                                <height>140</height>
-                                <textoffsetx>0</textoffsetx>
-                                <align>center</align>
+                                <height>95</height>
+                                <textoffsetx>80</textoffsetx>
+                                <textwidth>250</textwidth>
+                                <align>left</align>
                                 <texturefocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-focus.png</texturefocus>
                                 <texturenofocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-nofocus.png</texturenofocus>
                                 <font>font13</font>
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>77</textoffsety>
-                                <radioposx>118</radioposx>
-                                <radioposy>30</radioposy>
-                                <radiowidth>44</radiowidth>
-                                <radioheight>44</radioheight>
+                                <textoffsety>22</textoffsety>
+                                <radioposx>30</radioposx>
+                                <radioposy>27</radioposy>
+                                <radiowidth>36</radiowidth>
+                                <radioheight>36</radioheight>
                                 <selected>!IsEmpty(Window.Property(favorite))</selected>
                                 <visible>!IsEmpty(Window.Property(tmdb_logged_in))</visible>
                                 <visible>!StringCompare(Window.Property(type),season) + !StringCompare(Window.Property(type),episode)</visible>
@@ -281,20 +288,21 @@
                                 <textureradiooffnofocus colordiffuse="FF999999">icons/checkmark.png</textureradiooffnofocus>
                                 <textureradioonnofocus colordiffuse="FF999999">icons/checkmark.png</textureradioonnofocus>
                                 <width>280</width>
-                                <height>140</height>
-                                <textoffsetx>0</textoffsetx>
-                                <align>center</align>
+                                <height>95</height>
+                                <textoffsetx>80</textoffsetx>
+                                <textwidth>250</textwidth>
+                                <align>left</align>
                                 <texturefocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-focus.png</texturefocus>
                                 <texturenofocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-nofocus.png</texturenofocus>
                                 <font>font13</font>
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>77</textoffsety>
-                                <radioposx>118</radioposx>
-                                <radioposy>30</radioposy>
-                                <radiowidth>44</radiowidth>
-                                <radioheight>44</radioheight>
+                                <textoffsety>22</textoffsety>
+                                <radioposx>30</radioposx>
+                                <radioposy>27</radioposy>
+                                <radiowidth>36</radiowidth>
+                                <radioheight>36</radioheight>
                                 <visible>!IsEmpty(Window.Property(tmdb_logged_in))</visible>
                                 <visible>!StringCompare(Window.Property(type),season) + !StringCompare(Window.Property(type),episode)</visible>
                             </control>
@@ -305,20 +313,21 @@
                                 <textureradiooffnofocus colordiffuse="FF999999">icons/list2.png</textureradiooffnofocus>
                                 <textureradioonnofocus colordiffuse="FF999999">icons/list2.png</textureradioonnofocus>
                                 <width>280</width>
-                                <height>140</height>
-                                <textoffsetx>0</textoffsetx>
-                                <align>center</align>
+                                <height>95</height>
+                                <textoffsetx>80</textoffsetx>
+                                <textwidth>250</textwidth>
+                                <align>left</align>
                                 <texturefocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-focus.png</texturefocus>
                                 <texturenofocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-nofocus.png</texturenofocus>
                                 <font>font13</font>
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>77</textoffsety>
-                                <radioposx>118</radioposx>
-                                <radioposy>30</radioposy>
-                                <radiowidth>44</radiowidth>
-                                <radioheight>44</radioheight>
+                                <textoffsety>22</textoffsety>
+                                <radioposx>30</radioposx>
+                                <radioposy>27</radioposy>
+                                <radiowidth>36</radiowidth>
+                                <radioheight>36</radioheight>
                                 <visible>!IsEmpty(Window.Property(tmdb_logged_in))</visible>
                                 <visible>!StringCompare(Window.Property(type),season) + !StringCompare(Window.Property(type),episode)</visible>
                             </control>
@@ -329,39 +338,41 @@
                                 <textureradiooffnofocus colordiffuse="FF999999">icons/list2.png</textureradiooffnofocus>
                                 <textureradioonnofocus colordiffuse="FF999999">icons/list2.png</textureradioonnofocus>
                                 <width>280</width>
-                                <height>140</height>
-                                <textoffsetx>0</textoffsetx>
-                                <align>center</align>
+                                <height>95</height>
+                                <textoffsetx>80</textoffsetx>
+                                <textwidth>250</textwidth>
+                                <align>left</align>
                                 <texturefocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-focus.png</texturefocus>
                                 <texturenofocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-nofocus.png</texturenofocus>
                                 <font>font13</font>
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>77</textoffsety>
-                                <radioposx>118</radioposx>
-                                <radioposy>30</radioposy>
-                                <radiowidth>44</radiowidth>
-                                <radioheight>44</radioheight>
+                                <textoffsety>22</textoffsety>
+                                <radioposx>30</radioposx>
+                                <radioposy>27</radioposy>
+                                <radiowidth>36</radiowidth>
+                                <radioheight>36</radioheight>
                                 <visible>IsEmpty(Window.Property(tmdb_logged_in))</visible>
                                 <visible>!StringCompare(Window.Property(type),season) + !StringCompare(Window.Property(type),TVShow)</visible>
                             </control>
                             <control type="radiobutton" id="100">
                                 <width>280</width>
-                                <height>140</height>
-                                <textoffsetx>0</textoffsetx>
-                                <align>center</align>
+                                <height>95</height>
+                                <textoffsetx>80</textoffsetx>
+                                <textwidth>250</textwidth>
+                                <align>left</align>
                                 <texturefocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-focus.png</texturefocus>
                                 <texturenofocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-nofocus.png</texturenofocus>
                                 <font>font13</font>
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>77</textoffsety>
-                                <radioposx>118</radioposx>
-                                <radioposy>30</radioposy>
-                                <radiowidth>44</radiowidth>
-                                <radioheight>44</radioheight>
+                                <textoffsety>22</textoffsety>
+                                <radioposx>30</radioposx>
+                                <radioposy>27</radioposy>
+                                <radiowidth>36</radiowidth>
+                                <radioheight>36</radioheight>
                                 <label>$ADDON[script.extendedinfo 32132]</label>
                                 <onclick>XBMC.RunScript(script.videoextras,display,"$INFO[Window.Property(FilenameAndPath)]")</onclick>
                                 <visible>System.HasAddon(script.videoextras) + IsEmpty(Window(movieinformation).Property(HideVideoExtrasButton))</visible>
@@ -373,20 +384,21 @@
                             </control>
                             <control type="radiobutton" id="445">
                                 <width>280</width>
-                                <height>140</height>
-                                <textoffsetx>0</textoffsetx>
-                                <align>center</align>
+                                <height>95</height>
+                                <textoffsetx>80</textoffsetx>
+                                <textwidth>250</textwidth>
+                                <align>left</align>
                                 <texturefocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-focus.png</texturefocus>
                                 <texturenofocus border="40" colordiffuse="$INFO[Window(home).Property(ImageColor)]">buttons/roundedbutton-nofocus.png</texturenofocus>
                                 <font>font13</font>
                                 <textcolor>FF999999</textcolor>
                                 <focusedcolor>FFFAFAFA</focusedcolor>
                                 <aligny>bottom</aligny>
-                                <textoffsety>77</textoffsety>
-                                <radioposx>118</radioposx>
-                                <radioposy>30</radioposy>
-                                <radiowidth>44</radiowidth>
-                                <radioheight>44</radioheight>
+                                <textoffsety>22</textoffsety>
+                                <radioposx>30</radioposx>
+                                <radioposy>27</radioposy>
+                                <radiowidth>36</radiowidth>
+                                <radioheight>36</radioheight>
                                 <textureradioonfocus colordiffuse="FFFAFAFA">icons/tool2.png</textureradioonfocus>
                                 <textureradioofffocus colordiffuse="FFFAFAFA">icons/tool2.png</textureradioofffocus>
                                 <textureradiooffnofocus colordiffuse="FF999999">icons/tool2.png</textureradiooffnofocus>
@@ -416,7 +428,7 @@
                             <posx>20</posx>
                             <posy>0</posy>
                             <width>1045</width>
-                            <height>90</height>
+                            <height>95</height>
                             <orientation>horizontal</orientation>
                             <itemgap>25</itemgap>
                             <usecontrolcoords>true</usecontrolcoords>

@@ -204,6 +204,25 @@ def handle_db_tvshows(tvshow):
     return dict((k, v) for k, v in db_tvshow.iteritems() if v)
 
 
+def handle_db_seasons(season):
+    if SETTING("infodialog_onclick") != "false":
+        path = 'plugin://script.extendedinfo/?info=extendedtvinfo&&dbid=%s' % season['seasonid']
+    else:
+        path = 'plugin://script.extendedinfo/?info=action&&id=ActivateWindow(videos,videodb://seasons/titles/%s/,return)' % season['seasonid']
+    db_season = {'fanart': season["art"].get('fanart', ""),
+                 'poster': season["art"].get('poster', ""),
+                 'title': season.get('label', ""),
+                 'genre': " / ".join(season.get('genre', "")),
+                 'tvshowtitle': season.get('showtitle', ""),
+                 'tvshow_id': season.get('tvshowid', ""),
+                 'episodes_watched': season.get('watchedepisodes', ""),
+                 'playcount': season.get('playcount', ""),
+                 'path': path,
+                 'Play': "",
+                 'dbid': str(season['seasonid'])}
+    return dict((k, v) for k, v in db_season.iteritems() if v)
+
+
 def get_movie_from_db(movie_id):
     response = get_kodi_json(method="VideoLibrary.GetMovieDetails",
                              params='{"properties": ["title", "originaltitle", "votes", "playcount", "year", "genre", "studio", "country", "tagline", "plot", "runtime", "file", "plotoutline", "lastplayed", "trailer", "rating", "resume", "art", "streamdetails", "mpaa", "director", "writer", "cast", "dateadded", "imdbnumber"], "movieid":%s }' % str(movie_id))
@@ -217,6 +236,14 @@ def get_tvshow_from_db(tvshow_id):
                              params='{"properties": ["title", "genre", "year", "rating", "plot", "studio", "mpaa", "cast", "playcount", "episode", "imdbnumber", "premiered", "votes", "lastplayed", "fanart", "thumbnail", "file", "originaltitle", "sorttitle", "episodeguide", "season", "watchedepisodes", "dateadded", "tag", "art"], "tvshowid":%s }' % str(tvshow_id))
     if "result" in response and "tvshowdetails" in response["result"]:
         return handle_db_tvshows(response["result"]["tvshowdetails"])
+    return {}
+
+
+def get_season_from_db(season_id):
+    response = get_kodi_json(method="VideoLibrary.GetSeasonDetails",
+                             params='{"properties": ["season", "showtitle", "playcount", "episode", "fanart", "thumbnail", "tvshowid", "watchedepisodes", "art"], "seasonid":%s }' % season_id)
+    if "result" in response and "seasondetails" in response["result"]:
+        return handle_db_seasons(response["result"]["seasondetails"])
     return {}
 
 

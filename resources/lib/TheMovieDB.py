@@ -877,10 +877,10 @@ def extended_season_info(tvshow_id, season_number, dbid, tvshow_dbid):
     else:
         videos = []
     if dbid:
-        local_item = get_tvshow_from_db(dbid)
+        local_item = get_season_from_db(dbid)
         season.update(local_item)
-    else:
-        season = localdb.merge_with_local_tvshow_info([season])[0]
+    # else:
+    #     season = localdb.merge_with_local_season_info([season])[0]
     listitems = {"actors": handle_tmdb_people(response["credits"]["cast"]),
                  "crew": handle_tmdb_people(response["credits"]["crew"]),
                  "videos": videos,

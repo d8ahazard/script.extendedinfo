@@ -85,6 +85,7 @@ def get_tvshow_window(window_type):
         def open_season_dialog(self):
             wm.open_season_info(prev_window=self,
                                 tvshow_id=self.info["id"],
+                                tvshow_dbid=self.info["dbid"],
                                 season=self.listitem.getProperty("season"),
                                 tvshow=self.info['title'])
 

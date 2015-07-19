@@ -109,7 +109,7 @@ class WindowManager(object):
         xbmc.executebuiltin("Dialog.Close(busydialog)")
         self.open_dialog(dialog, prev_window)
 
-    def open_season_info(self, prev_window=None, tvshow_id=None, season=None, tvshow=None, dbid=None):
+    def open_season_info(self, prev_window=None, tvshow_id=None, season=None, tvshow=None, dbid=None, tvshow_dbid=None):
         """
         open season info, deal with window stack
         needs *season AND (*tvshow_id OR *tvshow)
@@ -131,6 +131,7 @@ class WindowManager(object):
         dialog = season_class(INFO_DIALOG_FILE, ADDON_PATH,
                               id=tvshow_id,
                               season=season,
+                              tvshow_dbid=tvshow_dbid,
                               dbid=dbid)
         xbmc.executebuiltin("Dialog.Close(busydialog)")
         self.open_dialog(dialog, prev_window)

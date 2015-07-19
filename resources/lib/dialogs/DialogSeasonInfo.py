@@ -24,6 +24,8 @@ def get_season_window(window_type):
             self.type = "Season"
             self.tvshow_id = kwargs.get('id')
             data = extended_season_info(tvshow_id=self.tvshow_id,
+                                        dbid=kwargs.get("dbid"),
+                                        tvshow_dbid=kwargs.get("tvshow_dbid"),
                                         season_number=kwargs.get('season'))
             if not data:
                 return None

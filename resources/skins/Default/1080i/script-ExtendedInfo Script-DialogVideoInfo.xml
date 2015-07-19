@@ -1832,6 +1832,16 @@
                             </focusedlayout>
                         </control>
                     </control>
+                                        <control type="image">
+                        <width>1860</width>
+                        <height>390</height>
+                        <posx>0</posx>
+                        <posy>0</posy>
+                        <animation effect="zoom" start="0" end="104" time="0" center="260,0" condition="true">Conditional</animation>
+                        <aspectratio aligny="top">keep</aspectratio>
+                        <texture>$INFO[Window.Property(banner)]</texture>
+                        <visible>!isEmpty(Window.Property(banner))</visible>
+                    </control>
                     <control type="group">
                         <visible>IntegerGreaterThan(Container(1450).NumItems,0)</visible>
                         <height>300</height>
@@ -2252,6 +2262,26 @@
                             <font>font14</font>
                             <label>$LOCALIZE[21861]$INFO[Container(950).NumItems, (,)]</label>
                         </control>
+                        <control type="image">
+                            <posx>0</posx>
+                            <posy>170</posy>
+                            <width>28</width>
+                            <height>28</height>
+                            <texture colordiffuse="$INFO[Window(home).Property(ImageColor)]" flipx="true">arrowright.png</texture>
+                            <animation effect="slide" start="30,0" end="0,0" time="200">VisibleChange</animation>
+                            <animation effect="slide" start="-150" end="0" delay="640" time="320" tween="cubic">WindowOpen</animation>
+                            <visible>Container(950).HasPrevious + Control.HasFocus(950)</visible>
+                        </control>
+                        <control type="image">
+                            <posx>1883</posx>
+                            <posy>170</posy>
+                            <width>28</width>
+                            <height>28</height>
+                            <texture colordiffuse="$INFO[Window(home).Property(ImageColor)]">arrowright.png</texture>
+                            <animation effect="slide" start="-30,0" end="0,0" time="200">VisibleChange</animation>
+                            <animation effect="slide" start="150" end="0" delay="640" time="320" tween="cubic">WindowOpen</animation>
+                            <visible>Container(950).HasNext + Control.HasFocus(950)</visible>
+                        </control>
                         <control type="panel" id="950">
                             <animation type="WindowOpen" reversible="false">
                                 <effect type="slide" start="0,2080" end="0,0" delay="1000" tween="sine" time="1300" />
@@ -2266,7 +2296,7 @@
                             <ondown>1250</ondown>
                             <pagecontrol>60</pagecontrol>
                             <scrolltime>300</scrolltime>
-                            <orientation>vertical</orientation>
+                            <orientation>horizontal</orientation>
                             <preloaditems>2</preloaditems>
                             <itemlayout height="100" width="270">
                                 <control type="group">

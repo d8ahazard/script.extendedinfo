@@ -144,7 +144,7 @@
                                 <radioposy>30</radioposy>
                                 <radiowidth>44</radiowidth>
                                 <radioheight>44</radioheight>
-                                <visible>!IsEmpty(Window.Property(DBID)) + !Stringcompare(Window.Property(Type),tvshow)</visible>
+                                <visible>!IsEmpty(Window.Property(DBID)) + !Stringcompare(Window.Property(Type),tvshow) + !Stringcompare(Window.Property(Type),season)</visible>
                             </control>
                             <control type="radiobutton" id="120">
                                 <label>$LOCALIZE[21385]</label>
@@ -167,7 +167,7 @@
                                 <radioposy>30</radioposy>
                                 <radiowidth>44</radiowidth>
                                 <radioheight>44</radioheight>
-                                <visible>!IsEmpty(Window.Property(DBID)) + Stringcompare(Window.Property(Type),tvshow)</visible>
+                                <visible>!IsEmpty(Window.Property(DBID)) + [Stringcompare(Window.Property(Type),tvshow) | Stringcompare(Window.Property(Type),season)]</visible>
                             </control>
                             <control type="group" id="99">
                                 <width>280</width>

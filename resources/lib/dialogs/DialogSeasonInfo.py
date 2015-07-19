@@ -53,6 +53,11 @@ def get_season_window(window_type):
             super(DialogSeasonInfo, self).onClick(control_id)
             ch.serve(control_id, self)
 
+        @ch.click(120)
+        def browse_season(self):
+            self.close()
+            xbmc.executebuiltin("ActivateWindow(videos,videodb://tvshows/titles/%s/%s?tvshowid=%s)" % (self.info["tvshow_dbid"], self.info["season"], self.info["tvshow_dbid"]))
+
         @ch.click(750)
         @ch.click(1000)
         def open_actor_info(self):

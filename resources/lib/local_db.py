@@ -6,13 +6,6 @@
 import xbmcvfs
 import simplejson
 from Utils import *
-id_list = []
-title_list = []
-otitle_list = []
-tvshow_id_list = []
-tvshow_otitle_list = []
-tvshow_title_list = []
-tvshow_imdb_list = []
 
 
 def get_kodi_artists():
@@ -245,150 +238,146 @@ def create_channel_list():
         return False
 
 
-def merge_with_local_movie_info(online_list=[], library_first=True, sortkey=False):
-    global id_list
-    global otitle_list
-    global title_list
-    global imdb_list
-    if not title_list:
+class LocalDbMovieProvider(object):
+    def __init__(self, *args, **kwargs):
+        self.id_list = []
+        self.otitle_list = []
+        self.title_list = []
+        self.imdb_list = []
+        self.tvshow_id_list = []
+        self.tvshow_otitle_list = []
+        self.tvshow_title_list = []
+        self.tvshow_imdb_list = []
+
+    def merge_with_local_movie_info(self, online_list=[], library_first=True, sortkey=False):
+        if not self.title_list:
+            now = time.time()
+            self.id_list = xbmc.getInfoLabel("Window(home).Property(id_list.JSON)")
+            if self.id_list and self.id_list != "[]":
+                self.id_list = simplejson.loads(self.id_list)
+                self.otitle_list = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(otitle_list.JSON)"))
+                title_list = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(title_list.JSON)"))
+                self.imdb_list = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(imdb_list.JSON)"))
+            else:
+                json_response = get_kodi_json(method="VideoLibrary.GetMovies",
+                                              params='{"properties": ["originaltitle", "imdbnumber"], "sort": { "method": "none" } }')
+                if "result" in json_response and "movies" in json_response["result"]:
+                    for item in json_response["result"]["movies"]:
+                        self.id_list.append(item["movieid"])
+                        self.imdb_list.append(item["imdbnumber"])
+                        self.otitle_list.append(item["originaltitle"].lower())
+                        self.title_list.append(item["label"].lower())
+                HOME.setProperty("id_list.JSON", simplejson.dumps(self.id_list))
+                HOME.setProperty("otitle_list.JSON", simplejson.dumps(self.otitle_list))
+                HOME.setProperty("title_list.JSON", simplejson.dumps(title_list))
+                HOME.setProperty("imdb_list.JSON", simplejson.dumps(self.imdb_list))
+            log("create_light_movielist: " + str(now - time.time()))
         now = time.time()
-        id_list = xbmc.getInfoLabel("Window(home).Property(id_list.JSON)")
-        if id_list and id_list != "[]":
-            id_list = simplejson.loads(id_list)
-            otitle_list = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(otitle_list.JSON)"))
-            title_list = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(title_list.JSON)"))
-            imdb_list = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(imdb_list.JSON)"))
-        else:
-            json_response = get_kodi_json(method="VideoLibrary.GetMovies",
-                                          params='{"properties": ["originaltitle", "imdbnumber"], "sort": { "method": "none" } }')
-            id_list = []
-            imdb_list = []
-            otitle_list = []
-            title_list = []
-            if "result" in json_response and "movies" in json_response["result"]:
-                for item in json_response["result"]["movies"]:
-                    id_list.append(item["movieid"])
-                    imdb_list.append(item["imdbnumber"])
-                    otitle_list.append(item["originaltitle"].lower())
-                    title_list.append(item["label"].lower())
-            HOME.setProperty("id_list.JSON", simplejson.dumps(id_list))
-            HOME.setProperty("otitle_list.JSON", simplejson.dumps(otitle_list))
-            HOME.setProperty("title_list.JSON", simplejson.dumps(title_list))
-            HOME.setProperty("imdb_list.JSON", simplejson.dumps(imdb_list))
-        log("create_light_movielist: " + str(now - time.time()))
-    now = time.time()
-    local_items = []
-    remote_items = []
-    for online_item in online_list:
-        found = False
-        if "imdb_id" in online_item and online_item["imdb_id"] in imdb_list:
-            index = imdb_list.index(online_item["imdb_id"])
-            found = True
-        elif online_item['title'].lower() in title_list:
-            index = title_list.index(online_item['title'].lower())
-            found = True
-        elif "OriginalTitle" in online_item and online_item["OriginalTitle"].lower() in otitle_list:
-            index = otitle_list.index(online_item["OriginalTitle"].lower())
-            found = True
-        if found:
-            local_item = get_movie_from_db(id_list[index])
-            if local_item:
-                try:
-                    diff = abs(int(local_item["year"]) - int(online_item["year"]))
-                    if diff > 1:
+        local_items = []
+        remote_items = []
+        for online_item in online_list:
+            found = False
+            if "imdb_id" in online_item and online_item["imdb_id"] in self.imdb_list:
+                index = self.imdb_list.index(online_item["imdb_id"])
+                found = True
+            elif online_item['title'].lower() in self.title_list:
+                index = self.title_list.index(online_item['title'].lower())
+                found = True
+            elif "OriginalTitle" in online_item and online_item["OriginalTitle"].lower() in self.otitle_list:
+                index = self.otitle_list.index(online_item["OriginalTitle"].lower())
+                found = True
+            if found:
+                local_item = get_movie_from_db(self.id_list[index])
+                if local_item:
+                    try:
+                        diff = abs(int(local_item["year"]) - int(online_item["year"]))
+                        if diff > 1:
+                            remote_items.append(online_item)
+                            continue
+                    except:
+                        pass
+                    online_item.update(local_item)
+                    if library_first:
+                        local_items.append(online_item)
+                    else:
                         remote_items.append(online_item)
-                        continue
-                except:
-                    pass
-                online_item.update(local_item)
-                if library_first:
-                    local_items.append(online_item)
                 else:
                     remote_items.append(online_item)
             else:
                 remote_items.append(online_item)
-        else:
-            remote_items.append(online_item)
-    log("compare time: " + str(now - time.time()))
-    if sortkey:
-        local_items = sorted(local_items, key=lambda k: k[sortkey], reverse=True)
-        remote_items = sorted(remote_items, key=lambda k: k[sortkey], reverse=True)
-    return local_items + remote_items
+        log("compare time: " + str(now - time.time()))
+        if sortkey:
+            local_items = sorted(local_items, key=lambda k: k[sortkey], reverse=True)
+            remote_items = sorted(remote_items, key=lambda k: k[sortkey], reverse=True)
+        return local_items + remote_items
 
-
-def merge_with_local_tvshow_info(online_list=[], library_first=True, sortkey=False):
-    global tvshow_id_list
-    global tvshow_otitle_list
-    global tvshow_title_list
-    global tvshow_imdb_list
-    if not tvshow_title_list:
+    def merge_with_local_tvshow_info(self, online_list=[], library_first=True, sortkey=False):
+        if not self.tvshow_title_list:
+            now = time.time()
+            self.tvshow_id_list = xbmc.getInfoLabel("Window(home).Property(tvshow_id_list.JSON)")
+            if self.tvshow_id_list and self.tvshow_id_list != "[]":
+                self.tvshow_id_list = simplejson.loads(self.tvshow_id_list)
+                self.tvshow_otitle_list = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(tvshow_otitle_list.JSON)"))
+                self.tvshow_title_list = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(tvshow_title_list.JSON)"))
+                self.tvshow_imdb_list = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(tvshow_imdb_list.JSON)"))
+            else:
+                json_response = get_kodi_json(method="VideoLibrary.GetTVShows",
+                                              params='{"properties": ["originaltitle", "imdbnumber"], "sort": { "method": "none" } }')
+                if "result" in json_response and "tvshows" in json_response["result"]:
+                    for item in json_response["result"]["tvshows"]:
+                        self.tvshow_id_list.append(item["tvshowid"])
+                        self.tvshow_imdb_list.append(item["imdbnumber"])
+                        self.tvshow_otitle_list.append(item["originaltitle"].lower())
+                        self.tvshow_title_list.append(item["label"].lower())
+                HOME.setProperty("tvshow_id_list.JSON", simplejson.dumps(self.tvshow_id_list))
+                HOME.setProperty("tvshow_otitle_list.JSON", simplejson.dumps(self.tvshow_otitle_list))
+                HOME.setProperty("tvshow_title_list.JSON", simplejson.dumps(self.tvshow_title_list))
+                HOME.setProperty("tvshow_imdb_list.JSON", simplejson.dumps(self.tvshow_imdb_list))
+            log("create_light_tvshowlist: " + str(now - time.time()))
         now = time.time()
-        tvshow_id_list = xbmc.getInfoLabel("Window(home).Property(tvshow_id_list.JSON)")
-        if tvshow_id_list and tvshow_id_list != "[]":
-            tvshow_id_list = simplejson.loads(tvshow_id_list)
-            tvshow_otitle_list = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(tvshow_otitle_list.JSON)"))
-            tvshow_title_list = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(tvshow_title_list.JSON)"))
-            tvshow_imdb_list = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(tvshow_imdb_list.JSON)"))
-        else:
-            json_response = get_kodi_json(method="VideoLibrary.GetTVShows",
-                                          params='{"properties": ["originaltitle", "imdbnumber"], "sort": { "method": "none" } }')
-            tvshow_id_list = []
-            tvshow_imdb_list = []
-            tvshow_otitle_list = []
-            tvshow_title_list = []
-            if "result" in json_response and "tvshows" in json_response["result"]:
-                for item in json_response["result"]["tvshows"]:
-                    tvshow_id_list.append(item["tvshowid"])
-                    tvshow_imdb_list.append(item["imdbnumber"])
-                    tvshow_otitle_list.append(item["originaltitle"].lower())
-                    tvshow_title_list.append(item["label"].lower())
-            HOME.setProperty("tvshow_id_list.JSON", simplejson.dumps(tvshow_id_list))
-            HOME.setProperty("tvshow_otitle_list.JSON", simplejson.dumps(tvshow_otitle_list))
-            HOME.setProperty("tvshow_title_list.JSON", simplejson.dumps(tvshow_title_list))
-            HOME.setProperty("tvshow_imdb_list.JSON", simplejson.dumps(tvshow_imdb_list))
-        log("create_light_tvshowlist: " + str(now - time.time()))
-    now = time.time()
-    local_items = []
-    remote_items = []
-    for online_item in online_list:
-        found = False
-        if "imdb_id" in online_item and online_item["imdb_id"] in tvshow_imdb_list:
-            index = tvshow_imdb_list.index(online_item["imdb_id"])
-            found = True
-        elif online_item['title'].lower() in tvshow_title_list:
-            index = tvshow_title_list.index(online_item['title'].lower())
-            found = True
-        elif "OriginalTitle" in online_item and online_item["OriginalTitle"].lower() in tvshow_otitle_list:
-            index = tvshow_otitle_list.index(online_item["OriginalTitle"].lower())
-            found = True
-        if found:
-            local_item = get_tvshow_from_db(tvshow_id_list[index])
-            if local_item:
-                try:
-                    diff = abs(int(local_item["year"]) - int(online_item["year"]))
-                    if diff > 1:
+        local_items = []
+        remote_items = []
+        for online_item in online_list:
+            found = False
+            if "imdb_id" in online_item and online_item["imdb_id"] in self.tvshow_imdb_list:
+                index = self.tvshow_imdb_list.index(online_item["imdb_id"])
+                found = True
+            elif online_item['title'].lower() in self.tvshow_title_list:
+                index = self.tvshow_title_list.index(online_item['title'].lower())
+                found = True
+            elif "OriginalTitle" in online_item and online_item["OriginalTitle"].lower() in self.tvshow_otitle_list:
+                index = self.tvshow_otitle_list.index(online_item["OriginalTitle"].lower())
+                found = True
+            if found:
+                local_item = get_tvshow_from_db(self.tvshow_id_list[index])
+                if local_item:
+                    try:
+                        diff = abs(int(local_item["year"]) - int(online_item["year"]))
+                        if diff > 1:
+                            remote_items.append(online_item)
+                            continue
+                    except:
+                        pass
+                    online_item.update(local_item)
+                    if library_first:
+                        local_items.append(online_item)
+                    else:
                         remote_items.append(online_item)
-                        continue
-                except:
-                    pass
-                online_item.update(local_item)
-                if library_first:
-                    local_items.append(online_item)
                 else:
                     remote_items.append(online_item)
             else:
                 remote_items.append(online_item)
-        else:
-            remote_items.append(online_item)
-    log("compare time: " + str(now - time.time()))
-    if sortkey:
-        local_items = sorted(local_items,
-                             key=lambda k: k[sortkey],
-                             reverse=True)
-        remote_items = sorted(remote_items,
-                              key=lambda k: k[sortkey],
-                              reverse=True)
-    return local_items + remote_items
+        log("compare time: " + str(now - time.time()))
+        if sortkey:
+            local_items = sorted(local_items,
+                                 key=lambda k: k[sortkey],
+                                 reverse=True)
+            remote_items = sorted(remote_items,
+                                  key=lambda k: k[sortkey],
+                                  reverse=True)
+        return local_items + remote_items
+
+localdb = LocalDbMovieProvider()
 
 
 def compare_album_with_library(online_list):

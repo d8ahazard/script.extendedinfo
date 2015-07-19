@@ -316,7 +316,7 @@ def handle_tmdb_movies(results=[], local_first=True, sortkey="year"):
                     'Premiered': fetch(movie, 'release_date')}
         listitem.update(artwork)
         movies.append(listitem)
-    movies = merge_with_local_movie_info(movies, local_first, sortkey)
+    movies = localdb.merge_with_local_movie_info(movies, local_first, sortkey)
     return movies
 
 
@@ -363,7 +363,7 @@ def handle_tmdb_tvshows(results, local_first=True, sortkey="year"):
                  'Premiered': fetch(tv, 'first_air_date')}
         newtv.update(artwork)
         tvshows.append(newtv)
-    tvshows = merge_with_local_tvshow_info(tvshows, local_first, sortkey)
+    tvshows = localdb.merge_with_local_tvshow_info(tvshows, local_first, sortkey)
     return tvshows
 
 
@@ -744,7 +744,7 @@ def extended_movie_info(movie_id=None, dbid=None, cache_time=14):
         local_item = get_movie_from_db(dbid)
         movie.update(local_item)
     else:
-        movie = merge_with_local_movie_info([movie])[0]
+        movie = localdb.merge_with_local_movie_info([movie])[0]
     movie['Rating'] = fetch(response, 'vote_average')  # hack to get tmdb rating instead of local one
     listitems = {"actors": handle_tmdb_people(response["credits"]["cast"]),
                  "similar": handle_tmdb_movies(response["similar"]["results"]),
@@ -829,7 +829,7 @@ def extended_tvshow_info(tvshow_id=None, cache_time=7, dbid=None):
         local_item = get_tvshow_from_db(dbid)
         tvshow.update(local_item)
     else:
-        tvshow = merge_with_local_tvshow_info([tvshow])[0]
+        tvshow = localdb.merge_with_local_tvshow_info([tvshow])[0]
     tvshow['Rating'] = fetch(response, 'vote_average')  # hack to get tmdb rating instead of local one
     listitems = {"actors": handle_tmdb_people(response["credits"]["cast"]),
                  "similar": handle_tmdb_tvshows(response["similar"]["results"]),
@@ -846,7 +846,7 @@ def extended_tvshow_info(tvshow_id=None, cache_time=7, dbid=None):
     return (tvshow, listitems, account_states)
 
 
-def extended_season_info(tvshow_id, season_number):
+def extended_season_info(tvshow_id, season_number, dbid, tvshow_dbid):
     if not tvshow_id or not season_number:
         return None
     session_str = ""
@@ -876,6 +876,11 @@ def extended_season_info(tvshow_id, season_number):
         videos = handle_tmdb_videos(response["videos"]["results"])
     else:
         videos = []
+    if dbid:
+        local_item = get_tvshow_from_db(dbid)
+        season.update(local_item)
+    else:
+        season = localdb.merge_with_local_tvshow_info([season])[0]
     listitems = {"actors": handle_tmdb_people(response["credits"]["cast"]),
                  "crew": handle_tmdb_people(response["credits"]["crew"]),
                  "videos": videos,

@@ -348,7 +348,7 @@ class LocalDbMovieProvider(object):
                                   reverse=True)
         return local_items + remote_items
 
-    def compare_album_with_library(online_list):
+    def compare_album_with_library(self, online_list):
         if not self.album_list:
             self.album_list = get_kodi_albums()
         for online_item in online_list:

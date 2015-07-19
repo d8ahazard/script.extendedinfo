@@ -283,9 +283,9 @@ class LocalDbMovieProvider(object):
             self.info[media_type]["ids"] = xbmc.getInfoLabel("Window(home).Property(id_list.%s)" % media_type)
             if self.info[media_type]["ids"] and self.info[media_type]["ids"] != "[]":
                 self.info[media_type]["ids"] = simplejson.loads(self.info[media_type]["ids"])
-                self.info[media_type]["otitles"] = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(otitle_list.%s)" % media_type))
-                self.info[media_type]["titles"] = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(title_list.%s)" % media_type))
-                self.info[media_type]["imdbs"] = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(imdb_list.%s)" % media_type))
+                self.info[media_type]["otitles"] = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(otitles.%s)" % media_type))
+                self.info[media_type]["titles"] = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(titles.%s)" % media_type))
+                self.info[media_type]["imdbs"] = simplejson.loads(xbmc.getInfoLabel("Window(home).Property(imdbs.%s)" % media_type))
             else:
                 self.info[media_type]["ids"] = []
                 if media_type == "tvshows":
@@ -300,10 +300,10 @@ class LocalDbMovieProvider(object):
                         self.info[media_type]["imdbs"].append(item["imdbnumber"])
                         self.info[media_type]["otitles"].append(item["originaltitle"].lower())
                         self.info[media_type]["titles"].append(item["label"].lower())
-                HOME.setProperty("id_list.%s" % media_type, simplejson.dumps(self.info[media_type]["ids"]))
-                HOME.setProperty("otitle_list.%s" % media_type, simplejson.dumps(self.info[media_type]["otitles"]))
-                HOME.setProperty("title_list.%s" % media_type, simplejson.dumps(self.info[media_type]["titles"]))
-                HOME.setProperty("imdb_list.%s" % media_type, simplejson.dumps(self.info[media_type]["imdbs"]))
+                HOME.setProperty("ids.%s" % media_type, simplejson.dumps(self.info[media_type]["ids"]))
+                HOME.setProperty("otitles.%s" % media_type, simplejson.dumps(self.info[media_type]["otitles"]))
+                HOME.setProperty("titles.%s" % media_type, simplejson.dumps(self.info[media_type]["titles"]))
+                HOME.setProperty("imdbs.%s" % media_type, simplejson.dumps(self.info[media_type]["imdbs"]))
             log("get local %s info: %s" % (media_type, now - time.time()))
         now = time.time()
         local_items = []

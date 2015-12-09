@@ -367,7 +367,7 @@ def millify(n):
     """
     make large numbers human-readable, return string
     """
-    millnames = [' ', '.000', ' ' + LANG(32000), ' ' + LANG(32001), ' ' + LANG(32002)]
+    millnames = [' ', '', ' ' + LANG(32000), ' ' + LANG(32001), ' ' + LANG(32002)]
     if not n or n <= 100:
         return ""
     n = float(n)
